@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 
 @SpringBootTest
 class BookRepositoryTest {
@@ -24,5 +26,25 @@ class BookRepositoryTest {
         newBook.setAuthor("lee");
         Book book = bookRepository.save(newBook);
         System.out.println(book);
+    }
+
+    @Test
+    void findById(){
+        Book book = bookRepository.findById(1).get();
+        System.out.println(book);
+    }
+
+    @Test
+    void update(){
+        Book book = new Book();
+        book.setId(6);
+        book.setName("Java抓娃");
+        book.setAuthor("维系布鲁克");
+        bookRepository.save(book);
+    }
+
+    @Test
+    void deleteById(){
+        bookRepository.deleteById(10);
     }
 }

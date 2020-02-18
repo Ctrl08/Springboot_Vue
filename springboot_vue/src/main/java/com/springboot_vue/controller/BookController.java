@@ -39,4 +39,28 @@ public class BookController {
             return "error";
         }
     }
+
+    //根据id查信息
+    @GetMapping("/findById/{id}")
+    public Book findById(@PathVariable("id") Integer id){
+        return bookRepository.findById(id).get();
+    }
+
+    //更新信息
+    @PutMapping("/update")
+    public String update(@RequestBody Book book) {
+        System.out.println("前端传来的book-------" + book);
+        Book saveBook = bookRepository.save(book);
+        if (saveBook != null) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
+
+    //删除
+    @DeleteMapping("/delete/{id}")
+    public void delete(@PathVariable("id") Integer id){
+        bookRepository.deleteById(id);
+    }
 }
